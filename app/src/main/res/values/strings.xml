@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Smart Home</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="lighting_spinner_prompt">Choose Lighting</string>
+
+    <string name="break_in_alert">Security breach: \n anti-burglar system compromised</string>
+    <string name="fire_alert">Security breach: \nfire detected</string>
+    <string name="carbon_monoxide_alert">Security breach: \npossible carbon monoxide poisoning</string>
+    <string name="flood_alert">Security breach: \nwater detected, danger of flood</string>
+    <string name="unexpected_movement_alert">Security breach: \nunexpected movement detected</string>
+    <string name="tap_open_alert">Turn off the tap</string>
+
+    <string-array name="lighting_arrays_bedroom">
+        <item>off</item>
+        <item>ceiling light</item>
+        <item>wall light</item>
+        <item>bedside lamp left</item>
+        <item>bedside lamp right</item>
+    </string-array>
+
+</resources>
