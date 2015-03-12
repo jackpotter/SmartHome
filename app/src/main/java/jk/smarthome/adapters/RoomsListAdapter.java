@@ -1,22 +1,23 @@
 package jk.smarthome.adapters;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
+import jk.smarthome.ParentActivity;
 import jk.smarthome.R;
+import jk.smarthome.fragments.appliances.OvenDialogFragment;
 import jk.smarthome.models.Room;
 
 /**
@@ -83,7 +84,6 @@ public class RoomsListAdapter extends BaseAdapter {
         TextView bedsideLeftLightTV = (TextView) view.findViewById(R.id.bedsideLeftLightTV);
         TextView bedsideRightLightTV = (TextView) view.findViewById(R.id.bedsideRightLightTV);
 
-
         Button cameraPreviewButton = (Button) view.findViewById(R.id.cameraPreviewButton);
         Button bathtubMenuButton = (Button) view.findViewById(R.id.bathtubMenuButton);
         Button washingMachineMenuButton  = (Button) view.findViewById(R.id.washingMachineMenuButton);
@@ -101,6 +101,8 @@ public class RoomsListAdapter extends BaseAdapter {
 
         Room room = roomList.get(position);
         roomTitleTv.setText(roomList.get(position).getName());
+
+
 
         cameraSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -195,6 +197,72 @@ public class RoomsListAdapter extends BaseAdapter {
             bedsideRightLightTV.setVisibility(View.GONE);
         }
 
+        setBedsideLightSwitches(bedsideLeftLightSwitch, bedsideRightLightSwitch);
+
+        setKitchenOvenButton(ovenMenuButton);
+        setKitchenRefrigeratorButton(refrigeratorMenuButton);
+        setKitchenDishwasherButton(dishwasherMenuButton);
+
         return view;
+    }
+
+    private void setKitchenOvenButton(Button ovenButton){
+        ovenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm =  ((ParentActivity)context).getSupportFragmentManager();
+                fm.beginTransaction().add(OvenDialogFragment.newInstance(), "OvenDialogFragment").commit();
+            }
+        });
+    }
+
+    private void setKitchenRefrigeratorButton(Button refrigeratorButton){
+        refrigeratorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm =  ((ParentActivity)context).getSupportFragmentManager();
+                fm.beginTransaction().add(OvenDialogFragment.newInstance(), "RefrigeratorDialogFragment").commit();
+            }
+        });
+    }
+
+    private void setKitchenDishwasherButton(Button dishwasherButton){
+        dishwasherButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm =  ((ParentActivity)context).getSupportFragmentManager();
+                fm.beginTransaction().add(OvenDialogFragment.newInstance(), "DishwasherDialogFragment").commit();
+            }
+        });
+    }
+
+    private void setBedsideLightSwitches(Switch leftSwitch, Switch rightSwitch){
+
+        leftSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    ((ParentActivity) context).sendData("1");
+                    Toast.makeText(context, "Left bedside lamp on", Toast.LENGTH_SHORT).show();
+                } else {
+                    ((ParentActivity) context).sendData("2");
+                    Toast.makeText(context, "Left bedside lamp off", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        rightSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    ((ParentActivity) context).sendData("3");
+                    Toast.makeText(context, "Right bedside lamp on", Toast.LENGTH_SHORT).show();
+                } else {
+                    ((ParentActivity) context).sendData("4");
+                    Toast.makeText(context, "Right bedside lamp off", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 }

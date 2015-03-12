@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="300dp"
+    android:minWidth="300dp"
+    android:background="#D1D1CF"
+    android:padding="0dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:id="@+id/applianceNameTV"
+        android:text="Refrigerator"
+        android:textSize="20sp"
+        android:background="#009688"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="OVEN"
+        android:id="@+id/tvLabel" />
+
+    <Spinner
+        android:id="@+id/ovenProgramSelectionSpinner"
+        android:background="#D1D1CF"
+        android:layout_gravity="center"
+        android:layout_width="200dp"
+        android:layout_height="24dp"
+        android:entries="@array/lighting_arrays_bedroom"
+        android:prompt="@string/lighting_spinner_prompt" />
+
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#009688"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="enter"
+        android:id="@+id/enterButton" />
+</LinearLayout>

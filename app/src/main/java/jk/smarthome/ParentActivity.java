@@ -60,7 +60,7 @@ public class ParentActivity extends FragmentActivity {
 
         turnBTOn();
 
-        k1On.setOnClickListener(new View.OnClickListener() {
+       /* k1On.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendData("1");
@@ -90,7 +90,7 @@ public class ParentActivity extends FragmentActivity {
                 sendData("4");
                 Toast.makeText(getBaseContext(), "k2 off", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
     }
 
@@ -172,7 +172,7 @@ public class ParentActivity extends FragmentActivity {
         }
     }
 
-    private void sendData(String message) {
+    public void sendData(String message) {
         byte[] msgBuffer = message.getBytes();
 
         try{
