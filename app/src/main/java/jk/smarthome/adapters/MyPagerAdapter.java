@@ -37,9 +37,9 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
             case 1: // Fragment # 0 - This will show FirstFragment different title
                 return RoomControlFragment.newInstance(1, "Room Control");
             case 2: // Fragment # 1 - This will show SecondFragment
-                return RoomControlFragment.newInstance(2, "Outside Control");
+                return OutdoorFragment.newInstance(2, "Outside Control");
             case 3:
-                return RoomControlFragment.newInstance(3, "Security and Settings");
+                return SecurityAndSettingsFragment.newInstance(3, "Security and Settings");
             default:
                 return null;
         }

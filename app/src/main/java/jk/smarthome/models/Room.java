@@ -1,5 +1,7 @@
 package jk.smarthome.models;
 
+import java.util.HashMap;
+
 /**
  * Created by jacek on 02-12-2014.
  */
@@ -32,6 +34,8 @@ public class Room {
     private int oven;
     private int dishwasher;
     private int refrigerator;
+
+    private HashMap<String, String> appliances= new HashMap<>(); // key = name of appliance, value mode
 
     public Room(int id, String name, int humidity, int temperature, int lighting, int presence, int cameras,
 
@@ -257,5 +261,13 @@ public class Room {
 
     public void setOpenWindow1(int openWindow1) {
         this.openWindow1 = openWindow1;
+    }
+
+    public HashMap<String, String> getAppliances() {
+        return appliances;
+    }
+
+    public void setAppliances(HashMap<String, String> appliances) {
+        this.appliances = appliances;
     }
 }

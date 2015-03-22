@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fridge_machine_states">
+        <item>Heavy</item>
+        <item>Regular</item>
+        <item>Light</item>
+        <item>Drain and spin</item>
+        <item>Rinse and spin</item>
+
+
+    </string-array>
+
+    <string-array name="oven_states">
+        <item>Select mode</item>
+        <item>Defrost mode</item>
+        <item>Conventional oven mode</item>
+        <item>Lower floor heating mode</item>
+        <item>Upper element mode</item>
+    </string-array>
+
+
+    <string-array name="dishwasher_states">
+        <item>Select mode</item>
+        <item>Auto</item>
+        <item>Intensive</item>
+        <item>Delicate</item>
+        <item>Eco</item>
+        <item>Quick</item>
+    </string-array>
+
+
+
+</resources>

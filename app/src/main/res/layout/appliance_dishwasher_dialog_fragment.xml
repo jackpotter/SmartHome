@@ -24,17 +24,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="OVEN"
-        android:id="@+id/tvLabel" />
+        android:text="select mode"
+        android:id="@+id/selectModeTV" />
 
     <Spinner
-        android:id="@+id/ovenProgramSelectionSpinner"
+        android:id="@+id/dishwasherProgramSelectionSpinner"
         android:background="#D1D1CF"
         android:layout_gravity="center"
         android:layout_width="200dp"
         android:layout_height="24dp"
-        android:entries="@array/lighting_arrays_bedroom"
-        android:prompt="@string/lighting_spinner_prompt" />
+        android:entries="@array/dishwasher_states" />
 
 
     <View

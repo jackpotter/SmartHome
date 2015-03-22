@@ -223,7 +223,7 @@
                         android:text="ceiling"/>
 
                     <Switch
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:gravity="left"
@@ -246,7 +246,7 @@
                         android:text="wall"/>
 
                     <Switch
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="left"
                         android:layout_gravity="left"
@@ -269,7 +269,7 @@
                         android:text="left bedside"/>
 
                     <Switch
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="left"
                         android:layout_gravity="left"
@@ -292,7 +292,7 @@
                         android:layout_gravity="center"/>
 
                     <Switch
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="left"
                         android:layout_gravity="left"
@@ -449,7 +449,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/refrigeratorMenuButton"
-                android:text="refrigerator"/>
+                android:text="refrigerator"
+                android:visibility="gone"/>
 
         </LinearLayout>
 

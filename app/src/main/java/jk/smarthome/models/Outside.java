@@ -7,6 +7,4 @@ public class Outside {
 
     private int id;
 
-
-
 }

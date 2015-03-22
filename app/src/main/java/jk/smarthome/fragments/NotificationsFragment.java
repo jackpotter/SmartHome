@@ -10,13 +10,15 @@ import android.widget.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import jk.smarthome.SmartHomeApplication;
 import jk.smarthome.R;
 import jk.smarthome.adapters.AlertListAdapter;
+import jk.smarthome.adapters.ApplianceStateListAdapter;
 import jk.smarthome.adapters.MyPagerAdapter;
-import jk.smarthome.adapters.RoomsListAdapter;
 import jk.smarthome.models.Alert;
+import jk.smarthome.models.ApplienceState;
 import jk.smarthome.models.Room;
 
 /**
@@ -27,6 +29,12 @@ public class NotificationsFragment extends Fragment {
     private String title;
     private int page;
     TextView brokenIntoNotificationTV;
+
+    ListView alertListView;
+    ListView stateListView;
+
+    View rootView;
+
 
     // newInstance constructor for creating fragment with arguments
     public static NotificationsFragment newInstance(int page, String title) {
@@ -49,11 +57,57 @@ public class NotificationsFragment extends Fragment {
     // Inflate the view for the fragment based on layout XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.notifications_fragment, container, false);
+        rootView = inflater.inflate(R.layout.notifications_fragment, container, false);
 
-       List<Room> roomList = ((SmartHomeApplication)getActivity().getApplication()).getRoomList();
+        List<Room> roomList = ((SmartHomeApplication)getActivity().getApplication()).getRoomList();
 
-       List<Alert> alertList = new ArrayList<>();
+        setAlertListView(rootView, getAlertList(roomList));
+
+        setStateListView(rootView, getApplienceStates(roomList));
+
+        rootView.findViewById(R.id.refresh_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                refreshStateList();
+            }
+        });
+
+
+        return rootView;
+    }
+
+    private List<ApplienceState> getApplienceStates(List<Room> roomList){
+
+        List<ApplienceState> applienceStates = new ArrayList<>();
+
+        for(Room room : roomList){
+            if(room.getAppliances() != null){
+                for(Map.Entry<String, String> entry : room.getAppliances().entrySet()){
+                    if(entry.getValue() != null){
+                        //Toast.makeText(getActivity(), entry.getValue(), Toast.LENGTH_SHORT).show();
+                        String applianceText = entry.getKey() + ": " + entry.getValue();
+                        ApplienceState state = new ApplienceState(applianceText, room.getName());
+                        applienceStates.add(state);
+                    }
+                }
+            }
+        }
+
+        return applienceStates;
+    }
+
+    public void setStateListView (View view, List<ApplienceState> stateList) {
+
+        stateListView = (ListView) view.findViewById(R.id.applianceListView);
+
+        ApplianceStateListAdapter stateListAdapter = new ApplianceStateListAdapter(getActivity(), stateList);
+
+        stateListView.setAdapter(stateListAdapter);
+
+    }
+
+    private List<Alert> getAlertList(List<Room> roomList){
+        List<Alert> alertList = new ArrayList<>();
 
         for (Room room : roomList){
 
@@ -108,22 +162,35 @@ public class NotificationsFragment extends Fragment {
             }
 
         }
-
-        setListView(view, alertList);
-
-
-        return view;
+        return alertList;
     }
 
-    public void setListView (View view, List<Alert> alertList) {
+    public void setAlertListView(View view, List<Alert> alertList) {
 
-        ListView alertListView = (ListView) view.findViewById(R.id.alertListView);
+        alertListView = (ListView) view.findViewById(R.id.alertListView);
 
         AlertListAdapter alertListAdapter = new AlertListAdapter(getActivity(), alertList);
 
         alertListView.setAdapter(alertListAdapter);
 
+    }
 
+    public void refreshStateList(){
+        if(stateListView != null){
+            ((ApplianceStateListAdapter) stateListView.getAdapter()).notifyDataSetChanged();
+            ((ApplianceStateListAdapter) stateListView.getAdapter()).notifyDataSetInvalidated();
+        }
+
+        List<Room> roomList = ((SmartHomeApplication)getActivity().getApplication()).getRoomList();
+
+        setAlertListView(rootView, getAlertList(roomList));
+
+        setStateListView(rootView, getApplienceStates(roomList));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
 
     }
 }

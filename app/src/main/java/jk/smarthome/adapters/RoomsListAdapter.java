@@ -17,6 +17,7 @@ import java.util.List;
 
 import jk.smarthome.ParentActivity;
 import jk.smarthome.R;
+import jk.smarthome.fragments.appliances.DishwasherDialogFragment;
 import jk.smarthome.fragments.appliances.OvenDialogFragment;
 import jk.smarthome.models.Room;
 
@@ -231,7 +232,7 @@ public class RoomsListAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 FragmentManager fm =  ((ParentActivity)context).getSupportFragmentManager();
-                fm.beginTransaction().add(OvenDialogFragment.newInstance(), "DishwasherDialogFragment").commit();
+                fm.beginTransaction().add(DishwasherDialogFragment.newInstance(), "DishwasherDialogFragment").commit();
             }
         });
     }

@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.UUID;
 
 import jk.smarthome.adapters.MyPagerAdapter;
+import jk.smarthome.fragments.NotificationsFragment;
 
 
 public class ParentActivity extends FragmentActivity {
@@ -47,9 +49,34 @@ public class ParentActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.parent_activity);
 
-        ViewPager vPager = (ViewPager) findViewById(R.id.vpPager);
+        final ViewPager vPager = (ViewPager) findViewById(R.id.vpPager);
+        vPager.setOffscreenPageLimit(-1);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vPager.setAdapter(adapterViewPager);
+
+        /*vPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(final int position) {
+                if(adapterViewPager.getItem(position) instanceof NotificationsFragment){
+                    (new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((NotificationsFragment)adapterViewPager.getItem(position)).refreshStateList();
+                        }
+                    }, 1000));
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });*/
+
 
         k1On = (Button) findViewById(R.id.k1On);
         k1Off = (Button) findViewById(R.id.k1Off);
@@ -59,38 +86,6 @@ public class ParentActivity extends FragmentActivity {
         btAdapter = BluetoothAdapter.getDefaultAdapter();
 
         turnBTOn();
-
-       /* k1On.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendData("1");
-                Toast.makeText(getBaseContext(), "k1 on", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        k1Off.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendData("2");
-                Toast.makeText(getBaseContext(), "k1 off", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        k2On.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendData("3");
-                Toast.makeText(getBaseContext(), "k2 on", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        k2Off.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendData("4");
-                Toast.makeText(getBaseContext(), "k2 off", Toast.LENGTH_SHORT).show();
-            }
-        });*/
 
     }
 
